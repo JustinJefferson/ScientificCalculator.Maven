@@ -1,5 +1,6 @@
 package com.zipcodewilmington.scientificcalculator;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Interface {
@@ -37,9 +38,9 @@ public class Interface {
 
         Double changeToDouble = 0.0;
 
-        System.out.println("#################################/n");
-        System.out.println("Welcome to the Group 2 Calculator/n");
-        System.out.println("#################################/n");
+        System.out.println("#################################\n");
+        System.out.println("Welcome to the Group 2 Calculator\n");
+        System.out.println("#################################\n");
 
         while (runInterface) {
 
@@ -47,15 +48,17 @@ public class Interface {
 
             if (!function.isEmpty()) {
                 //Do function and Nothing else
+                performFunction();
+
             } else {
                 // Perform math
                 if ((!expression.isEmpty()) && (!inputNum.isEmpty())) {
                     //perform math and change input Num
-
-                    // for testing replace working number with input
+                    performExpression();
                 }
                 if ((!inputNum.isEmpty()) && (!operator.isEmpty())) {
                     //perform operation on working number
+                    //performOperation
 
                     changeToDouble = new Double(inputNum);
                     workingNum = changeToDouble;
@@ -74,8 +77,17 @@ public class Interface {
             System.out.println(workingNum);
             System.out.println();
 
+            //Testing parse
+//            System.out.println(function);
+//            System.out.println(operator);
+//            System.out.println(expression);
+//            System.out.println(inputNum);
+//            System.out.println(input);
+
             resetInput();
         }
+
+        System.out.println("Calculator Shutting down...");
 
 
     }
@@ -92,18 +104,12 @@ public class Interface {
 
         //get the user input
         input = userIn.nextLine();
+        input += " fill";
         input = input.trim();
         input = input.toLowerCase();
 
         System.out.println();
-        /*
-        //find the operator
-        operator = findOperator(input);
 
-        //find the expression
-        //Call the appropriate calculator method
-
-        */
         int i = 0;
         String match = "";
         String check = "";
@@ -376,7 +382,7 @@ public class Interface {
         inputNum = foundNum;
     }
 
-    private void performExpression(String) {
+    private void performExpression() {
 
         /* These are all of the extended functions
 
@@ -393,6 +399,95 @@ public class Interface {
         calcExp
         calcExp10
          */
+
+        switch(expression){
+            case "sqrt":
+                // inputNum = <objectName>.calcSqrt(inputNum);
+                break;
+
+            case "sin":
+                // inputNum = <objectName>.calcSin(inputNum);
+                break;
+
+            case "cos":
+                // inputNum = <objectName>.calcCos(inputNum);
+                break;
+
+            case "tan":
+                // inputNum = <objectName>.calcTan(inputNum);
+                break;
+
+            case "arcsin":
+                // inputNum = <objectName>.calcArcSin(inputNum);
+                break;
+
+            case "arccos":
+                // inputNum = <objectName>.calcArcCos(inputNum);
+                break;
+
+            case "arctan":
+                // inputNum = <objectName>.calcArcTan(inputNum);
+                break;
+
+            case "log":
+                // inputNum = <objectName>.calcLog(inputNum);
+                break;
+
+            case "ln":
+                // inputNum = <objectName>.calcExp(inputNum);
+                break;
+
+            case "e":
+                // inputNum = <objectName>.calcExp10(inputNum);
+                break;
+
+            case "!":
+                // inputNum = <objectName>.calcFactorial(inputNum);
+                break;
+
+            default:
+                System.out.println("Err: No Expression Found\n");
+                break;
+        }
+    }
+
+    private void performFunction(){
+
+        switch(function) {
+            case "c":
+                workingNum = 0.0;
+                break;
+
+            case "m+":
+                memory += workingNum;
+                break;
+
+            case "mc":
+                memory = 0.0;
+                break;
+
+            case "mrc":
+                System.out.println("Memory: " + memory + "\n");
+                break;
+
+            case "display":
+                break;
+
+            case "trig unit":
+                break;
+
+            case "history":
+                break;
+
+            case "recall":
+                break;
+
+            case "quit":
+                runInterface = false;
+                break;
+
+        }
+
     }
 
 
