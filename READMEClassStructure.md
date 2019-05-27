@@ -22,10 +22,12 @@ For this project we need 3 classes not including the test class; a calculator cl
 - inverse natural log operator
 - factorial operator
 
-### Interface Operations
+### com.zipcodewilmington.scientificcalculator.Interface Operations
 - clear operation
 - memory operations "M+, MC, MRC"
 - base display operations
 - trig unit display operations
 - history operations
 - recall operations
+
+Look at manualCommands.md for input information
