@@ -1,4 +1,6 @@
-public class extendedCalculator {
+package com.zipcodewilmington.scientificcalculator;
+
+public class ExtendedCalculator {
 /*
     public static void main(String[] args) {
 

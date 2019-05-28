@@ -1,6 +1,6 @@
 # Scientific Calculator Class Structure
 
-For this project we need 3 classes not including the test class; a calculator class, a extendedCalculator class, and an interface class. The calculator and extendedCalculator class wiil contain methods dealing with the mathmatical operations. The interface class will take user inputs through a string in the console and  call upon the appropriate functions in the order they need to be called upon.
+For this project we need 3 classes not including the test class; a calculator class, a ExtendedCalculator class, and an interface class. The calculator and ExtendedCalculator class wiil contain methods dealing with the mathmatical operations. The interface class will take user inputs through a string in the console and  call upon the appropriate functions in the order they need to be called upon.
 
 ### Calculator Operations
 - arithmatic operations "+, -, *, /"

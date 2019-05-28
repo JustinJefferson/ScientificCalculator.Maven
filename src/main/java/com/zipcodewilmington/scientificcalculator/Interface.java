@@ -1,5 +1,6 @@
 package com.zipcodewilmington.scientificcalculator;
 
+import javax.xml.bind.SchemaOutputResolver;
 import java.util.Scanner;
 
 public class Interface {
@@ -12,6 +13,9 @@ public class Interface {
     private String function;
     private String inputNum;
     private boolean runInterface;
+    private BasicCalc basicCalc;
+    private ExtendedCalculator exCalc;
+    private boolean isRadians;
 
     public Interface() {
         workingNum = 0.0;
@@ -23,6 +27,9 @@ public class Interface {
         function = "";
         inputNum = "";
         runInterface = true;
+        basicCalc = new BasicCalc();
+        exCalc = new ExtendedCalculator();
+        isRadians = true;
     }
 
     private void resetInput() {
@@ -37,9 +44,9 @@ public class Interface {
 
         Double changeToDouble = 0.0;
 
-        System.out.println("#################################/n");
-        System.out.println("Welcome to the Group 2 Calculator/n");
-        System.out.println("#################################/n");
+        System.out.println("#################################\n");
+        System.out.println("Welcome to the Group 2 Calculator\n");
+        System.out.println("#################################\n");
 
         while (runInterface) {
 
@@ -47,18 +54,21 @@ public class Interface {
 
             if (!function.isEmpty()) {
                 //Do function and Nothing else
+                performFunction();
             } else {
                 // Perform math
                 if ((!expression.isEmpty()) && (!inputNum.isEmpty())) {
                     //perform math and change input Num
 
-                    // for testing replace working number with input
+                    performExpression();
                 }
                 if ((!inputNum.isEmpty()) && (!operator.isEmpty())) {
                     //perform operation on working number
+                    performOperator();
+                    //System.out.println("Perfoming operator");
 
-                    changeToDouble = new Double(inputNum);
-                    workingNum = changeToDouble;
+                    // changeToDouble = new Double(inputNum);
+                    //workingNum = changeToDouble;
                 } else if (!inputNum.isEmpty()) {
                     //replace working number with input number
 
@@ -70,12 +80,23 @@ public class Interface {
                     System.out.println();
                 }
             }
+//            System.out.println(operator);
+//            System.out.println(expression);
+//            System.out.println(inputNum);
+//            System.out.println(function);
+//            System.out.println(input);
+//            System.out.println();
 
-            System.out.println(workingNum);
-            System.out.println();
+            if(runInterface) {
+                System.out.println(workingNum);
+                System.out.println();
+            }
 
             resetInput();
+
         }
+
+        System.out.println("Shutting Down Calculator...");
 
 
     }
@@ -92,6 +113,7 @@ public class Interface {
 
         //get the user input
         input = userIn.nextLine();
+        input += "fill";
         input = input.trim();
         input = input.toLowerCase();
 
@@ -144,7 +166,7 @@ public class Interface {
                     break;
 
                 case "square":
-                    operator = "square";
+                    function = "square";
                     input = input.substring(6);
                     input = input.trim();
                     i = -1;
@@ -156,9 +178,16 @@ public class Interface {
                     i = -1;
                     break;
 
-                case "inv":
-                    operator = "inv";
-                    input = input.substring(3);
+                case "invert":
+                    function = "invert";
+                    input = input.substring(6);
+                    input = input.trim();
+                    i = -1;
+                    break;
+
+                case "inverse":
+                    function = "inverse";
+                    input = input.substring(7);
                     input = input.trim();
                     i = -1;
                     break;
@@ -219,6 +248,12 @@ public class Interface {
                     i = -1;
                     break;
 
+                case "10^":
+                    expression = "10^";
+                    input = input.substring(3);
+                    input = input.trim();
+                    i = -1;
+
                 case "ln":
                     expression = "ln";
                     input = input.substring(2);
@@ -226,7 +261,7 @@ public class Interface {
                     i = -1;
                     break;
 
-                case "e":
+                case "e^":
                     expression = "e";
                     input = input.substring(1);
                     input = input.trim();
@@ -376,7 +411,7 @@ public class Interface {
         inputNum = foundNum;
     }
 
-    private void performExpression(String) {
+    private void performExpression() {
 
         /* These are all of the extended functions
 
@@ -393,6 +428,165 @@ public class Interface {
         calcExp
         calcExp10
          */
+        Double numIn = new Double(inputNum);
+        Double result = 0.0;
+
+        switch(expression){
+            case "sin":
+                result = ExtendedCalculator.calcSin(numIn, isRadians);
+                break;
+
+            case "cos":
+                result = ExtendedCalculator.calcCos(numIn, isRadians);
+                break;
+
+            case "tan":
+                result = ExtendedCalculator.calcTan(numIn, isRadians);
+                break;
+
+            case "arcsin":
+                result = ExtendedCalculator.calcArcSin(numIn, isRadians);
+                break;
+
+            case "arccos":
+                result = ExtendedCalculator.calcArcCos(numIn, isRadians);
+                break;
+
+            case "arctan":
+                result = ExtendedCalculator.calcArcTan(numIn, isRadians);
+                break;
+
+            case "sqrt":
+                result = ExtendedCalculator.calcSqrt(numIn);
+                break;
+
+            case "log":
+                result = ExtendedCalculator.calcLog(numIn);
+                break;
+
+            case "ln": // log10
+                result = ExtendedCalculator.calcLog10(numIn);
+                break;
+
+            case "!":  // Factorial
+                Integer intResult = ExtendedCalculator.calcFactorial(numIn.intValue());
+                result = intResult.doubleValue();
+                break;
+
+            case "e^": // exp
+                result = ExtendedCalculator.calcExp(numIn);
+                break;
+
+            case "10^":// exp10
+                result = ExtendedCalculator.calcExp10(numIn);
+                break;
+
+            default:
+                System.out.println("Err: Expression not found\n");
+                break;
+
+        }
+        inputNum = result.toString();
+    }
+
+    private void performOperator(){
+
+        Double numIn = new Double(inputNum);
+        double placeholder = 0;
+
+        switch(operator) {
+            case "+":
+                placeholder = basicCalc.sumCalc(workingNum, numIn);
+                break;
+
+            case "-":
+                placeholder = basicCalc.diffCalc(workingNum, numIn);
+                break;
+
+            case "*":
+                placeholder = basicCalc.productCalc(workingNum, numIn);
+                break;
+
+            case "/":
+                if (numIn == 0) {
+                    System.out.println("Err: Undefined\n");
+                    placeholder = 0.0;
+                } else {
+                    placeholder = basicCalc.quotientCalc(workingNum, numIn);
+                }
+                break;
+
+            case "^":
+                placeholder = basicCalc.exponentCalc(workingNum, numIn);
+                break;
+
+            default:
+                System.out.println("Err: Operator not found\n");
+                break;
+        }
+        //System.out.println(placeholder);
+
+        workingNum = placeholder;
+
+    }
+
+    private void performFunction(){
+
+        switch(function){
+            case "c":
+                workingNum = 0.0;
+                break;
+
+            case "m+":
+                memory += workingNum;
+                break;
+
+            case "mc":
+                memory = 0.0;
+                break;
+
+            case "mrc":
+                System.out.println("Memory: " + memory + "\n");
+                break;
+
+            case "display":
+                break;
+
+            case "trig unit":
+                break;
+
+            case "history":
+                break;
+
+            case "recall":
+                break;
+
+            case "quit":
+                runInterface = false;
+                break;
+
+            // These functions were moved from operators to improve program function
+            case "square":
+                workingNum = basicCalc.squareCalc(workingNum);
+                break;
+
+            case "invert":
+                if (workingNum == 0) {
+                    System.out.println("Err: Undefined\n");
+                    workingNum = 0.0;
+                } else {
+                    workingNum = basicCalc.invertCalc(workingNum);
+                }
+                break;
+
+            case "inverse":
+                workingNum = basicCalc.inverseCalc(workingNum);
+                break;
+
+            default:
+                System.out.println("Err: Function not found\n");
+                break;
+        }
     }
 
 
