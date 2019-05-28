@@ -3,6 +3,12 @@ package com.zipcodewilmington.scientificcalculator;
 
 public class BasicCalc {
 
+    public BasicCalc(){
+
+    }
+
+
+
     public double sumCalc(double a, double b){
 
         double sum = a + b;
