@@ -155,10 +155,12 @@ public class Interface {
                     break;
 
                 case "-":
-                    operator = "-";
-                    input = input.substring(1);
-                    input = input.trim();
-                    i = -1;
+                    if(operator.isEmpty()) {
+                        operator = "-";
+                        input = input.substring(1);
+                        input = input.trim();
+                        i = -1;
+                    }
                     break;
 
                 case "*":
@@ -364,6 +366,10 @@ public class Interface {
         for (char digit : findNum) {
 
             switch (digit) {
+                case '-':
+                    if(foundNum.isEmpty()) foundNum += "-";
+                    break;
+
                 case '0':
                     foundNum += "0";
                     break;

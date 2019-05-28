@@ -138,7 +138,7 @@ public class TestMainApplication {
     @Test
     public void LogTest(){
 
-        Double check = ExtendedCalculator.calcLog(100.0);
+        Double check = ExtendedCalculator.calcLog10(100.0);
         Double expected = 2.0;
         assertEquals(expected, check);
 
