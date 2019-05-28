@@ -37,7 +37,7 @@ Input | Expression and Result
 `MRC` | prints the memory to the display
 `display` |
 `display type` |
-`trigUnit` |
+`trigUnit` | changes trig input between radians and degrees
 `trigUnit type` |
 `history` |
 `recall` |

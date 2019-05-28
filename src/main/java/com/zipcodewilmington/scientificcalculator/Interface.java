@@ -29,7 +29,7 @@ public class Interface {
         runInterface = true;
         basicCalc = new BasicCalc();
         exCalc = new ExtendedCalculator();
-        isRadians = true;
+        isRadians = false;
     }
 
     private void resetInput() {
@@ -553,6 +553,14 @@ public class Interface {
                 break;
 
             case "trig unit":
+                if (isRadians) {
+                    isRadians = false;
+                    System.out.println("Trig Unit: Degrees\n");
+                }
+                else {
+                    isRadians = true;
+                    System.out.println("Trig Uint: Radians\n");
+                }
                 break;
 
             case "history":
