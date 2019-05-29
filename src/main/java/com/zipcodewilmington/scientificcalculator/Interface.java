@@ -20,6 +20,8 @@ public class Interface {
     private BasicCalc basicCalc;
     private ExtendedCalculator exCalc;
     private boolean isRadians;
+    private String base;
+    private String display;
 
     public Interface() {
         workingNum = 0.0;
@@ -34,6 +36,8 @@ public class Interface {
         basicCalc = new BasicCalc();
         exCalc = new ExtendedCalculator();
         isRadians = false;
+        base = "10";
+        display = "";
     }
 
     private void resetInput() {
@@ -86,15 +90,37 @@ public class Interface {
                     System.out.println();
                 }
             }
-//            System.out.println(operator);
-//            System.out.println(expression);
-//            System.out.println(inputNum);
-//            System.out.println(function);
-//            System.out.println(input);
-//            System.out.println();
+            System.out.println(operator);
+            System.out.println(expression);
+            System.out.println(inputNum);
+            System.out.println(function);
+            System.out.println(input);
+            System.out.println();
 
             if(runInterface) {
-                System.out.println(workingNum);
+
+                if(base.equals("binary")) {
+
+                    display = displayBinary(workingNum);
+
+                }
+                else if(base.equals("hex")) {
+
+                    display = displayHexadecimal(workingNum);
+
+                }
+                else if(base.equals("octal")) {
+
+                    display = displayOctal(workingNum);
+
+                }
+                else {
+
+                    display = displayBase10(workingNum);
+
+                }
+
+                System.out.println(display);
                 System.out.println();
             }
 
@@ -288,10 +314,12 @@ public class Interface {
                     break;
 
                 case "c":
-                    function = "c";
-                    input = input.substring(1);
-                    input = input.trim();
-                    i = -1;
+                    if(input.length() == 1) {
+                        function = "c";
+                        input = input.substring(1);
+                        input = input.trim();
+                        i = -1;
+                    }
                     break;
 
                 case "m+":
@@ -322,8 +350,50 @@ public class Interface {
                     i = -1;
                     break;
 
+                case "binary":
+                    function = "binary";
+                    input = input.substring(6);
+                    input = input.trim();
+                    i = -1;
+                    break;
+
+                case "hex":
+                    function = "hex";
+                    input = input.substring(3);
+                    input = input.trim();
+                    i = -1;
+                    break;
+
+                case "octal":
+                    function = "octal";
+                    input = input.substring(5);
+                    input = input.trim();
+                    i = -1;
+                    break;
+
+                case "base10":
+                    function = "base10";
+                    input = input.substring(6);
+                    input = input.trim();
+                    i = -1;
+                    break;
+
                 case "trig unit":
                     function = "trig unit";
+                    input = input.substring(9);
+                    input = input.trim();
+                    i = -1;
+                    break;
+
+                case "radians":
+                    function = "radians";
+                    input = input.substring(7);
+                    input = input.trim();
+                    i = -1;
+                    break;
+
+                case "degrees":
+                    function = "degrees";
                     input = input.substring(9);
                     input = input.trim();
                     i = -1;
@@ -569,6 +639,50 @@ public class Interface {
                 break;
 
             case "display":
+                if(base.equals("binary")) {
+
+                    base = "hex";
+                    System.out.println("Display set to: HEX\n");
+
+                }
+                else if(base.equals("hex")) {
+
+                    base = "octal";
+                    System.out.println("Display set to: OCTAL\n");
+
+                }
+                else if(base.equals("octal")) {
+
+                    base = "10";
+                    System.out.println("Display set to: BASE 10\n");
+
+                }
+                else {
+
+                    base = "binary";
+                    System.out.println("Display set to: BINARY\n");
+
+                }
+                break;
+
+            case "binary":
+                base = "binary";
+                System.out.println("Display set to: BINARY\n");
+                break;
+
+            case "hex":
+                base = "hex";
+                System.out.println("Display set to: HEX\n");
+                break;
+
+            case "octal":
+                base = "octal";
+                System.out.println("Display set to: OCTAL\n");
+                break;
+
+            case "base10":
+                base = "10";
+                System.out.println("Display set to: BASE 10\n");
                 break;
 
             case "trig unit":
@@ -581,6 +695,16 @@ public class Interface {
                     isRadians = true;
                     System.out.println("Trig Uint: Radians\n");
                 }
+                break;
+
+            case "radians":
+                isRadians = true;
+                System.out.println("Trig Uint: Radians\n");
+                break;
+
+            case "degrees":
+                isRadians = false;
+                System.out.println("Trig Unit: Degrees\n");
                 break;
 
             case "history":
@@ -616,6 +740,37 @@ public class Interface {
                 System.out.println("Err: Function not found\n");
                 break;
         }
+
+    }
+
+    private String displayBinary(double num){
+
+        Double wrappedNum = num;
+        int intNum = wrappedNum.intValue();
+        return (Integer.toBinaryString(intNum));
+
+    }
+
+    private String displayHexadecimal(double num){
+
+        Double wrappedNum = num;
+        int intNum = wrappedNum.intValue();
+        return (Integer.toHexString(intNum));
+
+    }
+
+    private String displayOctal(double num){
+
+        Double wrappedNum = num;
+        int intNum = wrappedNum.intValue();
+        return (Integer.toOctalString(intNum));
+
+    }
+
+    private String displayBase10(double num){
+
+        Double wrappedNum = num;
+        return (wrappedNum.toString());
 
     }
 

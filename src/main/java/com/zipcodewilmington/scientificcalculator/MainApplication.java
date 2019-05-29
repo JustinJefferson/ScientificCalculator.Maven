@@ -9,7 +9,9 @@ public class MainApplication {
 
         begin.startInterface();
 
-        /*Console.println("Welcome to my calculator!");
+        /*
+
+        Console.println("Welcome to my calculator!");
         String s = Console.getStringInput("Enter a string");
         Integer i = Console.getIntegerInput("Enter an integer");
         Double d = Console.getDoubleInput("Enter a double.");
@@ -19,5 +21,7 @@ public class MainApplication {
         Console.println("The user input %s as a d", d);
 
          */
+
+
     }
 }

@@ -108,35 +108,59 @@ public class TestMainApplication {
     @Test
     public void SinTest(){
 
+        double check = ExtendedCalculator.calcSin(90.0, false);
+        double expected = 1.0;
+        assertEquals(expected, check, 0.01);
+
     }
 
     @Test
     public void CosTest(){
+
+        double check = ExtendedCalculator.calcCos(45.0, false);
+        double expected = 0.707;
+        assertEquals(expected, check, 0.001);
 
     }
 
     @Test
     public void TanTest(){
 
+        double check = ExtendedCalculator.calcTan(45.0, false);
+        double expected = 1.0;
+        assertEquals(expected, check, 0.01);
+
     }
 
     @Test
     public void ArcSinTest(){
+
+        double check = ExtendedCalculator.calcArcSin(1.0, false);
+        double expected = 90.0;
+        assertEquals(expected, check, 0.01);
 
     }
 
     @Test
     public void ArcCosTest(){
 
+        double check = ExtendedCalculator.calcArcCos(1.0, false);
+        double expected = 0.0;
+        assertEquals(expected, check, 0.01);
+
     }
 
     @Test
     public void ArcTanTest(){
 
+        double check = ExtendedCalculator.calcArcTan(1.0, false);
+        double expected = 45.0;
+        assertEquals(expected, check, 0.01);
+
     }
 
     @Test
-    public void LogTest(){
+    public void Log10Test(){
 
         Double check = ExtendedCalculator.calcLog10(100.0);
         Double expected = 2.0;
